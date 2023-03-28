@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
     image: auction:latest
     ports:
-      - "8080:8080"
+      - "8081:8081"
     environment:
       DATABASESERVER_PORT: "27017"
     depends_on:
