@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: auction
+  data:
+    mongodb:
+      authentication-database: admin
+      username: ${USERNAME}
+      password: ${PASSWORD}
+      database: ${DATABASE}
+      port: 27017
+      host: ${MONGO_HOST}
+logging:
+  level:
+    org.springframework.web: WARN
+    com.example: DEBUG
+server:
+  port: 8080
