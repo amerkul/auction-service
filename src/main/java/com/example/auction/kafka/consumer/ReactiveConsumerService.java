@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @Component
 @AllArgsConstructor
-public class ReactiveKafkaConsumer {
+public class ReactiveConsumerService {
 
     private final ReactiveKafkaConsumerTemplate<String, AccountCreatedEvent> consumerTemplate;
     private final ReactiveProducerService producerService;
@@ -48,7 +48,6 @@ public class ReactiveKafkaConsumer {
             command.setBalance(event.getBalance());
             command.setReserved(event.getReserved());
             command.setAuctionId(event.getAuctionId());
-
             if (event.getReserved() > auction.getStartPrice() && event.getReserved() > auction.getAmount()) {
                 auction.setBidder(event.getName());
                 auction.setAmount(event.getReserved());
