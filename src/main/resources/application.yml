@@ -4,11 +4,11 @@ spring:
   data:
     mongodb:
       authentication-database: admin
-      username: root
-      password: root
-      database: auction
+      username: ${USERNAME}
+      password: ${PASSWORD}
+      database: ${DATABASE}
       port: 27017
-      host: mongodb
+      host: ${MONGO_HOST}
 logging:
   level:
     org.springframework.web: WARN
