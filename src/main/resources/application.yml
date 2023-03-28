@@ -9,9 +9,31 @@ spring:
       database: ${DATABASE}
       port: 27017
       host: ${MONGO_HOST}
+  kafka:
+    topics:
+      bid: bidTopic
+      answer: answerTopic
+    bootstrap-servers: ${HOST}:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: reactivekafkagroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            use:
+              type:
+                headers: false
+            value:
+              default:
+                type: com.example.auction.kafka.dto.AccountCreatedEvent
 logging:
   level:
     org.springframework.web: WARN
     com.example: DEBUG
 server:
-  port: 8080
+  port: 8081
