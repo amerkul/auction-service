@@ -37,6 +37,7 @@ public class ReactiveKafkaConsumer {
         Mono<Auction> mono = service.retrieveById(event.getAuctionId());
         mono.doOnNext(auction -> {
             UpdateAccountCommand command = new UpdateAccountCommand();
+            command.setId(event.getId());
             command.setName(event.getName());
             command.setBalance(event.getBalance());
             command.setReserved(event.getReserved());
