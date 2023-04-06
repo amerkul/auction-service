@@ -28,6 +28,12 @@ services:
       - mongodb
     networks:
       - auction
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    restart:
+      unless-stopped
 networks:
   auction:
     name: network_name
