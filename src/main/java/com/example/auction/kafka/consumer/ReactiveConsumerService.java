@@ -29,13 +29,10 @@ public class ReactiveConsumerService {
     public void init() {
         consumerTemplate.receive()
                         .subscribe(record -> {
-                            redisService.set(
-                                    record.value().getId().toString(), record.value().getId().toString(), record.value()
-                                        )
-                                        .subscribe();
+                            String key = record.value().getId().toString();
+                            redisService.set(key, key, record.value()).subscribe();
                             process(record.value());
-                            record.receiverOffset()
-                                      .acknowledge();
+                            record.receiverOffset().acknowledge();
                         });
     }
 

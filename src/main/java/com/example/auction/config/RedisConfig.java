@@ -1,5 +1,6 @@
 package com.example.auction.config;
 
+import com.example.auction.kafka.dto.AccountCreatedEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,15 +31,14 @@ public class RedisConfig {
     }
 
     @Bean
-    public ReactiveRedisOperations<String, Object> redisOperations(ReactiveRedisConnectionFactory reactiveRedisConnectionFactory) {
-        Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(Object.class);
-
-        RedisSerializationContext.RedisSerializationContextBuilder<String, Object> builder =
+    public ReactiveRedisOperations<String, AccountCreatedEvent> redisOperations(ReactiveRedisConnectionFactory reactiveRedisConnectionFactory) {
+        Jackson2JsonRedisSerializer<AccountCreatedEvent> serializer = new Jackson2JsonRedisSerializer<>(AccountCreatedEvent.class);
+        RedisSerializationContext.RedisSerializationContextBuilder<String, AccountCreatedEvent> builder =
                 RedisSerializationContext.newSerializationContext(new StringRedisSerializer());
-
-        RedisSerializationContext<String, Object> context = builder.value(serializer).hashValue(serializer)
-                                                                   .hashKey(serializer).build();
-
+        RedisSerializationContext<String, AccountCreatedEvent> context = builder.value(serializer)
+                .hashValue(serializer)
+                .hashKey(serializer)
+                .build();
         return new ReactiveRedisTemplate<>(reactiveRedisConnectionFactory, context);
     }
 
