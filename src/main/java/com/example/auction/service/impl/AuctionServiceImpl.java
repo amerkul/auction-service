@@ -33,4 +33,13 @@ public class AuctionServiceImpl implements AuctionService {
         return repository.findAll();
     }
 
+    @Override
+    public Mono<Auction> retrieveById(String auctionId) {
+        return repository.findById(auctionId);
+    }
+
+    @Override
+    public Mono<Auction> update(Auction updateAuction) {
+        return repository.save(updateAuction);
+    }
 }

@@ -21,13 +21,19 @@ services:
       dockerfile: Dockerfile
     image: auction:latest
     ports:
-      - "8080:8080"
+      - "8081:8081"
     environment:
       DATABASESERVER_PORT: "27017"
     depends_on:
       - mongodb
     networks:
       - auction
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    restart:
+      unless-stopped
 networks:
   auction:
     name: network_name
