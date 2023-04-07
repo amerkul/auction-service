@@ -6,6 +6,7 @@ import com.example.auction.kafka.dto.AccountCreatedEvent;
 import com.example.auction.kafka.dto.BidStatus;
 import com.example.auction.kafka.dto.UpdateAccountCommand;
 import com.example.auction.kafka.producer.ReactiveProducerService;
+import com.example.auction.redis.RedisService;
 import com.example.auction.service.AuctionService;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
@@ -21,15 +22,17 @@ public class ReactiveConsumerService {
 
     private final ReactiveKafkaConsumerTemplate<String, AccountCreatedEvent> consumerTemplate;
     private final ReactiveProducerService producerService;
+    private RedisService redisService;
     private final AuctionService service;
 
     @PostConstruct
     public void init() {
         consumerTemplate.receive()
                         .subscribe(record -> {
+                            String key = record.value().getId().toString();
+                            redisService.set(key, key, record.value()).subscribe();
                             process(record.value());
-                            record.receiverOffset()
-                                      .acknowledge();
+                            record.receiverOffset().acknowledge();
                         });
     }
 

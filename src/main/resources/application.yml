@@ -9,6 +9,9 @@ spring:
       database: ${DATABASE}
       port: 27017
       host: ${MONGO_HOST}
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
   kafka:
     topics:
       bid: bidTopic
