@@ -17,6 +17,9 @@ import java.util.Map;
 @Configuration
 public class ReactiveKafkaConfiguration {
 
+    @Value("${spring.kafka.topics.bid}")
+    private String topic;
+
     @Bean
     public ReactiveKafkaProducerTemplate<String, UpdateAccountCommand> reactiveKafkaProducerTemplate(
             KafkaProperties properties) {
@@ -25,9 +28,9 @@ public class ReactiveKafkaConfiguration {
     }
 
     @Bean
-    public ReceiverOptions<String, AccountCreatedEvent> kafkaReceiverOptions(@Value("${spring.kafka.topics.bid}") String topic, KafkaProperties kafkaProperties) {
+    public ReceiverOptions<String, AccountCreatedEvent> kafkaReceiverOptions(KafkaProperties kafkaProperties) {
         ReceiverOptions<String, AccountCreatedEvent> basicReceiverOptions = ReceiverOptions.create(kafkaProperties.buildConsumerProperties());
-        return basicReceiverOptions.subscription(Collections.singletonList(topic));
+        return basicReceiverOptions.subscription(Collections.singletonList(this.topic));
     }
 
     @Bean
