@@ -27,7 +27,7 @@ jobs:
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
-        image: ${{ secrets.DOCKER_USERNAME }}/account-service
+        image: ${{ secrets.DOCKER_USERNAME }}/auction-service
         tags: 1.0.$GITHUB_RUN_NUMBER, latest         
         registry: docker.io
         dockerfile: Dockerfile
