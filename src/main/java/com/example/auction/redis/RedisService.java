@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor
 public class RedisService {
 
-    private final ReactiveRedisOperations<String, Object> redisOperations;
+    private final ReactiveRedisOperations<String, AccountCreatedEvent> redisOperations;
 
     /**
      * Set key and value into a hash key
