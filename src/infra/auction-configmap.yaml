@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  DATABASE: auction
+  HOST: kafka-service
+  MONGO_HOST: mongodb
+  PASSWORD: password
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
+  USERNAME: root
+kind: ConfigMap
+metadata:
+  labels:
+    service: auction-env
+  name: auction-env

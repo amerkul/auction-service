@@ -1,5 +1,6 @@
 package com.example.auction.redis;
 
+import com.example.auction.kafka.dto.AccountCreatedEvent;
 import lombok.AllArgsConstructor;
 import com.example.auction.kafka.dto.AccountCreatedEvent;
 import org.springframework.data.redis.core.ReactiveRedisOperations;
