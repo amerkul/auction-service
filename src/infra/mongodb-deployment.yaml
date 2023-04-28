@@ -9,6 +9,7 @@ spec:
   selector:
     matchLabels:
       app: mongodb
+  serviceName: "mongodb"
   template:
     metadata:
       labels:
@@ -22,7 +23,7 @@ spec:
               value: root
             - name: MONGO_INITDB_ROOT_USERNAME
               value: root
-          image: mongo:latest
+          image: mongo:5.0.17
           name: mongodb
           volumeMounts:
             - mountPath: /data/db

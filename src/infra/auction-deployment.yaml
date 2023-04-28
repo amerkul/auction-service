@@ -5,7 +5,7 @@ metadata:
     app: auction
   name: auction
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: auction
@@ -35,9 +35,9 @@ spec:
                   name: auction-env
             - name: PASSWORD
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: PASSWORD
-                  name: auction-env
+                  name: secret
             - name: REDIS_HOST
               valueFrom:
                 configMapKeyRef:
@@ -50,9 +50,9 @@ spec:
                   name: auction-env
             - name: USERNAME
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: USERNAME
-                  name: auction-env
+                  name: secret
           image: amerkul/auction-service:latest
           name: auction
           ports:
